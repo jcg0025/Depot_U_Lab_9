@@ -3,12 +3,14 @@
     <head>
         <title>Lab 9</title>
         <link rel="stylesheet" href="index.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script src='script.js'></script>
     </head>
     <body>
-        <button id = 'CarButton'>Car</button>
-        <button id = 'CopCarButton'>CopCar</button>
-        <button id = 'MotorcycleButton'>Motorcyce</button>
-        <button id = 'TankButton'>Tank</button>
+        <button onclick="addCar()">Car</button>
+        <button onclick="addCopCar()">CopCar</button>
+        <button onclick='addMotorcycle()'>Motorcycle</button>
+        <button onclick='addTank()'>Tank</button>
+        <div id='vehicleHolder'></div>
     </body>
 </html>

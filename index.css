@@ -1,5 +1,33 @@
-div {
+.car {
     height: 100px;
     width: 100px;
-    display: flex;
+    position: absolute;
+    background-color: aqua;
+}
+
+.copCar {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    background-color:blue;
+}
+
+.moto {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    background-color: blueviolet;
+}
+
+.tank {
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    background-color: green;
+}
+
+#vehicleHolder {
+    height: 1000px;
+    width: 1200px;
+    background-color: darkseagreen
 }

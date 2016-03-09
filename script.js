@@ -1,141 +1,160 @@
-document.addEventListener('DOMContentLoaded', function () {
 var Vehicle = function(){
-    this.div = null;
+    this.div = document.createElement('div');
 };
 
-Vehicle.prototype.move = function(){}
-Vehicle.prototype.damage = function(){}
-Vehicle.prototype.total = function(){}
+Vehicle.prototype.move = function(speed){
+    this.speed = speed;
+    $(this.div).animate({left:'+=1000px'},10000/speed);
+}
+Vehicle.prototype.damage = function(damageLimit){
+    var counter = 0;
+    this.damageLimit = damageLimit;
+    this.div.addEventListener('click', function() {
+        counter +=1;
+        if (counter == damageLimit) {
+            this.remove();
+        }
+    })
+}
+
+
 
 function Car() {
     Vehicle.call(this);
-    this.div = document.getElementsByClassName('car');
 }
 
-function CopCar () {
+function CopCar() {
     Car.call(this);
 }
 
-function Motorcycle () {
+function Motorcycle() {
     Vehicle.call(this);
 }
 
-function Tank () {
+function Tank() {
     Vehicle.call(this);
 }
 
 Car.prototype = Object.create(Vehicle.prototype);
-Car.prototype.constructer = Car;
+Car.prototype.constructor = Car;
 CopCar.prototype = Object.create(Car.prototype);
-CopCar.prototype.constructer = CopCar;
+CopCar.prototype.constructor = CopCar;
 Motorcycle.prototype = Object.create(Vehicle.prototype);
-Motorcycle.prototype.constructer = Motorcycle;
+Motorcycle.prototype.constructor = Motorcycle;
 Tank.prototype = Object.create(Vehicle.prototype);
-Tank.prototype.constructer = Tank;
+Tank.prototype.constructor = Tank;
 
 
-// Motorcycle.prototype.move = function() {
-//     var motoDiv = document.getElementsByClassName('moto');
-//     motoDiv.addEventListener('click', function() {
-//         console.log('weee');
-//     })
-// }
-
-
-// var car = new Car();
-
-
-// var copcar = new CopCar();
-
-// var moto = new Motorcycle();
-// moto.move();
-
-// var tank = new Tank();
-// tank.damage();
-
-
-var ranNum = (Math.floor(Math.random()*10) +1)*100;
-var randomPx = String(ranNum).concat('px');
-console.log(randomPx);
-
-
-var newDiv = document.createElement('div');
-newDiv.style.marginTop = randomPx;
-
-var carButton = document.getElementById('CarButton');
-carButton.addEventListener('click', function(){
-    var ranNum = (Math.floor(Math.random()*20) +1)*10;
-    var randomPx = String(ranNum).concat('px');
-    var newDiv = document.createElement('div');
-    newDiv.style.marginTop = randomPx
-    newDiv.style.marginLeft = randomPx;
-    newDiv.style.backgroundColor = 'blue';
-    newDiv.className = 'car';
-    document.body.appendChild(newDiv);
-})
-
-var copButton = document.getElementById('CopCarButton');
-copButton.addEventListener('click', function(){
-    var ranNum = (Math.floor(Math.random()*10) +1)*100;
-    var randomPx = String(ranNum).concat('px');
-    var newDiv = document.createElement('div');
-    newDiv.style.marginTop = randomPx
-    newDiv.style.marginLeft = randomPx;
-    newDiv.style.backgroundColor = 'red';
-    newDiv.className ='cop';
-    document.body.appendChild(newDiv);
-})
-
-var motoButton = document.getElementById('MotorcycleButton');
-motoButton.addEventListener('click', function(){
-    var ranNum = (Math.floor(Math.random()*10) +1)*100;
-    var randomPx = String(ranNum).concat('px');
-    var newDiv = document.createElement('div');
-    newDiv.style.marginTop = randomPx
-    newDiv.style.marginLeft = randomPx;
-    newDiv.style.backgroundColor = 'green';
-    newDiv.className ='moto';
-    document.body.appendChild(newDiv);
-})
-
-var tankButton = document.getElementById('TankButton');
-tankButton.addEventListener('click', function(){
-    var ranNum = (Math.floor(Math.random()*10) +1)*100;
-    var randomPx = String(ranNum).concat('px');
-    var newDiv = document.createElement('div');
-    newDiv.style.marginTop = randomPx
-    newDiv.style.marginLeft = randomPx;
-    newDiv.style.backgroundColor = 'yellow';
-    newDiv.className ='tank';
-    document.body.appendChild(newDiv);
-})
-
-
-Car.prototype.damage = function() {
-    this.div.addEventListener('click', function() {
-        console.log('bang');
-    })
+Car.prototype.insert = function() {
+    this.div.className = 'car'; 
+    document.getElementById('vehicleHolder').appendChild(this.div); 
+    
+    //Random Placement Engine
+    var randomNumber = String(Math.floor(Math.random()*90)*10);
+    var randomPx = randomNumber.concat('px');
+    var randomNumber2 = String(Math.floor(Math.random()*110)*10);
+    var randomPx2 = randomNumber2.concat('px');
+    this.div.style.marginTop = randomPx;
+    this.div.style.marginLeft = randomPx2;
 }
 
-var car = new Car();
-car.div.damage();
+CopCar.prototype.insert = function() {
+    this.div.className = 'copCar';
+    document.getElementById('vehicleHolder').appendChild(this.div);
+    
+    //Random Placement Engine
+    var randomNumber = String(Math.floor(Math.random()*90)*10);
+    var randomPx = randomNumber.concat('px');
+    var randomNumber2 = String(Math.floor(Math.random()*110)*10);
+    var randomPx2 = randomNumber2.concat('px');
+    this.div.style.marginTop = randomPx;
+    this.div.style.marginLeft = randomPx2;
+}
+
+Motorcycle.prototype.insert = function() {
+    this.div.className = 'moto';
+    document.getElementById('vehicleHolder').appendChild(this.div);
+    
+    //Random Placement Engine
+    var randomNumber = String(Math.floor(Math.random()*90)*10);
+    var randomPx = randomNumber.concat('px');
+    var randomNumber2 = String(Math.floor(Math.random()*110)*10);
+    var randomPx2 = randomNumber2.concat('px');
+    this.div.style.marginTop = randomPx;
+    this.div.style.marginLeft = randomPx2;
+}
+
+Tank.prototype.insert = function() {
+    this.div.className = 'tank';
+    document.getElementById('vehicleHolder').appendChild(this.div);
+    
+    //Random Placement Engine
+    var randomNumber = String(Math.floor(Math.random()*90)*10);
+    var randomPx = randomNumber.concat('px');
+    var randomNumber2 = String(Math.floor(Math.random()*110)*10);
+    var randomPx2 = randomNumber2.concat('px');
+    this.div.style.marginTop = randomPx;
+    this.div.style.marginLeft = randomPx2;
+}
+
+Car.prototype.reverse = function(speed) {
+    this.speed = speed; 
+    $(this.div).animate({left:'-=1000px'},10000/speed);   
+}
+
+CopCar.prototype.move = function(speed) {
+     this.speed = speed;
+    $(this.div).animate({top:'+=1000px'},10000/speed);
+}
+
+CopCar.prototype.siren = function(interval) {
+    this.interval = interval;
+    console.log(this.div);
+    var div = this.div;
+    var siren = function () {
+        div.style.backgroundColor = 'red';
+    }
+    var siren2 = function () {
+        div.style.backgroundColor = 'blue';
+    }
+    window.setInterval(siren, 2000);
+    window.setInterval(siren2, 1500);
+}
+
+Motorcycle.prototype.move = function(speed) {
+    this.speed = speed;
+     $(this.div).animate({top:'-=1000px', left:'+=1000px'},10000/speed);
+}
+
+function addCar() {
+    var car = new Car();
+    car.insert();
+    car.move(1);
+    car.damage(2);
+   
+}
+
+function addCopCar() {
+    var copcar = new CopCar();
+    copcar.insert();
+    copcar.move(1);
+    copcar.damage(3);
+    copcar.siren(2000);
+}
+
+function addMotorcycle() {
+    var moto = new Motorcycle();
+    moto.insert();
+    moto.move(2);
+    moto.damage(1);
+}
+
+function addTank() {
+    var tank = new Tank();
+    tank.insert();
+    tank.move(0.5);
+    tank.damage(10);
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-})
